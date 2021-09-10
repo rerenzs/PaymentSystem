@@ -35,8 +35,8 @@ GET https://localhost:44341/api/payments
 //get payment by paymentid 
 GET https://localhost:44341/api/payments/{paymentid}
 
-================================================
 Sample payloads for adding accounts and payments
+================================================
 
 POST
 https://localhost:44341/api/accounts
