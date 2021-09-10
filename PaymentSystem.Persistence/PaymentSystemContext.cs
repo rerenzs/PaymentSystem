@@ -20,14 +20,11 @@ namespace PaymentSystem.Persistence
         public DbSet<Payment> Payments { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-VJNVJ6K;Database=PaymentSystem;Trusted_Connection=True;MultipleActiveResultSets=True");
+            optionsBuilder.UseSqlServer("Server={yourservername};Database=PaymentSystem;Trusted_Connection=True;MultipleActiveResultSets=True");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Payment>().HasKey(p => new
-            //{
-            //    p.AccountID
-            //});
+            //seeder
             modelBuilder.Entity<Account>().HasData(
                 DefaultAccounts.AccountList()
                 );
