@@ -50,12 +50,12 @@ POST
 https://localhost:44341/api/accounts/{accountid}/payments
 {
         "Date": "2021-09-10T12:44:14.1337954",
-        "Amount": 22222222222222.00,
+        "Amount": 222222.00,
         "Reason": "some reason",
         "Status": "Pending"
 }
 
-==============================================
+=======================================================
 Solution Structure
 PaymentSystem.API - presentation layer for http api
 PaymentSystem.Domain - Project for entities, enums and interfaces.
