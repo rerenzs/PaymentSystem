@@ -9,8 +9,8 @@ How to build and run the project:
 	"Add-Migration <any migration name>"
 	"Update-Database"
 
--Run the project in IIS Express.
--For better viewing of JSON returns use Postman
+- Run the project in IIS Express.
+- For better viewing of JSON returns use Postman.
 
 API
 ================================================
@@ -55,10 +55,10 @@ https://localhost:44341/api/accounts/{accountid}/payments
         "Status": "Pending"
 }
 
-=======================================================
 Solution Structure
-PaymentSystem.API - presentation layer for http api
-PaymentSystem.Domain - Project for entities, enums and interfaces.
-PaymentSystem.Persistence - Project that contains the Db Context and repository implementation(Ef and Mock Repo).
-PaymentSystem.Services - Project that contains all the services implementation that will be used in the presentation layer.
-PaymentSystem.UnitTest - Project for unit testing
+=======================================================
+- PaymentSystem.API - presentation layer for http api
+- PaymentSystem.Domain - Project for entities, enums and interfaces.
+- PaymentSystem.Persistence - Project that contains the Db Context and repository implementation(Ef and Mock Repo).
+- PaymentSystem.Services - Project that contains all the services implementation that will be used in the presentation layer.
+- PaymentSystem.UnitTest - Project for unit testing
