@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PaymentSystem.Domain.IRepositories;
 using PaymentSystem.Domain.IServices;
-using PaymentSystem.Persistence.MockRepositories;
 using PaymentSystem.Services.Services;
 using System;
 using System.Collections.Generic;
@@ -20,6 +19,7 @@ using PaymentSystem.Services.Mapping;
 using PaymentSystem.Persistence;
 using PaymentSystem.Persistence.Repositories;
 using Newtonsoft.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 namespace PaymentSystem.API
 {
@@ -42,24 +42,18 @@ namespace PaymentSystem.API
                 options => options.JsonSerializerOptions.IgnoreNullValues = true
             );
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<PaymentSystemProfile>();
+            });
+
             services.AddScoped<IAccountService,AccountService>();
             services.AddScoped<IPaymentService, PaymentService>();
-
-            //If you want to test with hardcoded data uncomment this line then comment the nextline
-            //services.AddScoped<IUnitOfWork,MockUnitOfWork>();
             services.AddScoped<IUnitOfWork,UnitOfWork>();
+            services.AddScoped<DbContext, PaymentSystemContext>();
 
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new PaymentSystemProfile());
-            });
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
-            services.AddDbContext<PaymentSystemContext>();
-
-
-
+            services.AddDbContext<PaymentSystemContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

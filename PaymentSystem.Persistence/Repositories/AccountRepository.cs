@@ -1,4 +1,5 @@
-﻿using PaymentSystem.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PaymentSystem.Domain.Entities;
 using PaymentSystem.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace PaymentSystem.Persistence.Repositories
 {
     public class AccountRepository : Repository<Account>, IAccountRepository
     {
-        public AccountRepository(PaymentSystemContext ctx) 
+        public AccountRepository(DbContext ctx) 
             : base(ctx)
         {
         }

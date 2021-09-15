@@ -1,4 +1,4 @@
-﻿using PaymentSystem.Domain.ViewModels;
+﻿using PaymentSystem.Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +8,10 @@ namespace PaymentSystem.Domain.IServices
 {
     public interface IAccountService
     {
-        AccountViewModel Get(long id);
-        AccountViewModel Get(long id,string paymentStatus);
-        IQueryable<AccountViewModel> GetAll();
-        AccountViewModel Add(AccountViewModel accountViewModel);
+        AccountDTO Get(long id);
+        AccountDTO Get(long id,string paymentStatus);
+        IQueryable<AccountDTO> GetAll();
+        IEnumerable<AccountDTO> GetAllWithPayments();
+        AccountDTO Add(AccountDTO accountDTO);
     }
 }

@@ -1,4 +1,5 @@
-﻿using PaymentSystem.Domain.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using PaymentSystem.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace PaymentSystem.Persistence.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly PaymentSystemContext ctx;
+        private readonly DbContext ctx;
 
-        public Repository(PaymentSystemContext ctx)
+        public Repository(DbContext ctx)
         {
             this.ctx = ctx;
         }

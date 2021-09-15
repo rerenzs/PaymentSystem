@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PaymentSystem.Domain.IServices;
-using PaymentSystem.Domain.ViewModels;
+using PaymentSystem.Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +27,7 @@ namespace PaymentSystem.API.Controllers
             try
             {
                 var account = accountService.Get(accountid);
+                account.Payments = paymentService.GetAllByAccountId(account.ID);
 
                 if (account != null) return Ok(account.Payments);          
                 else return NotFound("Account not Found");
@@ -43,6 +44,7 @@ namespace PaymentSystem.API.Controllers
             try
             {
                 var account = accountService.Get(accountid);
+                account.Payments = paymentService.GetAllByAccountId(account.ID);
 
                 if (account != null) {
                     var payment = account.Payments.Where(x => x.ID == paymentid).FirstOrDefault();
@@ -58,17 +60,17 @@ namespace PaymentSystem.API.Controllers
             }
         }
         [HttpPost]
-        public IActionResult POST(long accountid,[FromBody] PaymentViewModel paymentViewModel)
+        public IActionResult POST(long accountid,[FromBody] PaymentDTO paymentDTO)
         {
             try
             {
                 var account = accountService.Get(accountid);
                 if (account != null)
                 {
-                    paymentViewModel.AccountID = accountid;
+                    paymentDTO.AccountID = accountid;
                     if (ModelState.IsValid)
                     {
-                        var payment = paymentService.Add(paymentViewModel);
+                        var payment = paymentService.Add(paymentDTO);
                         return Created($"/api/accounts/{accountid}/payments/{payment.ID}", payment);
                     }
                     else

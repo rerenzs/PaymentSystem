@@ -1,4 +1,5 @@
-﻿using PaymentSystem.Domain.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using PaymentSystem.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,17 +8,11 @@ namespace PaymentSystem.Persistence.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private PaymentSystemContext _ctx = null;
-        private PaymentSystemContext _context
+
+        private readonly DbContext _context;
+        public UnitOfWork(DbContext _context)
         {
-            get
-            {
-                if (_ctx == null)
-                {
-                    _ctx = new PaymentSystemContext();
-                }
-                return _ctx;
-            }
+            this._context = _context;
         }
         private IPaymentRepository _Payment;
         public IPaymentRepository Payment
@@ -42,8 +37,8 @@ namespace PaymentSystem.Persistence.Repositories
 
         public void Dispose()
         {
-            if (_ctx != null)
-                _ctx.Dispose();
+            if (_context != null)
+                _context.Dispose();
         }
 
         public bool SaveChanges()

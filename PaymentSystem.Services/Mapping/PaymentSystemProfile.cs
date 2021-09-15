@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using PaymentSystem.Domain.Entities;
-using PaymentSystem.Domain.ViewModels;
+using PaymentSystem.Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using PaymentSystem.Domain.Enums;
+using System.Linq;
 
 namespace PaymentSystem.Services.Mapping
 {
@@ -11,11 +13,14 @@ namespace PaymentSystem.Services.Mapping
     {
         public PaymentSystemProfile()
         {
-            this.CreateMap<Account, AccountViewModel>();
-            this.CreateMap<Account, AccountViewModel>().ReverseMap();
 
-            this.CreateMap<Payment, PaymentViewModel>();
-            this.CreateMap<Payment, PaymentViewModel>().ReverseMap();
+            this.CreateMap<PaymentDTO, Payment>();
+            this.CreateMap<PaymentDTO, Payment > ().ReverseMap();
+
+            this.CreateMap<Account, AccountDTO>();
+            this.CreateMap<Account, AccountDTO>().ReverseMap();
+
+
         }
     }
 }

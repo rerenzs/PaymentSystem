@@ -18,10 +18,6 @@ namespace PaymentSystem.Persistence
         }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server={yourservername};Database=PaymentSystem;Trusted_Connection=True;MultipleActiveResultSets=True");
-        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //seeder

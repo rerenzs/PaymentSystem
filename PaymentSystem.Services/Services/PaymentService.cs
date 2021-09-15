@@ -3,11 +3,12 @@ using AutoMapper.QueryableExtensions;
 using PaymentSystem.Domain.Entities;
 using PaymentSystem.Domain.IRepositories;
 using PaymentSystem.Domain.IServices;
-using PaymentSystem.Domain.ViewModels;
+using PaymentSystem.Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PaymentSystem.Domain.Enums;
 
 namespace PaymentSystem.Services.Services
 {
@@ -15,31 +16,41 @@ namespace PaymentSystem.Services.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
-        private readonly IAccountService accountService;
 
-        public PaymentService(IUnitOfWork unitOfWork, IMapper mapper, IAccountService accountService)
+        public PaymentService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
-            this.accountService = accountService;
         }
-        public PaymentViewModel Add(PaymentViewModel paymentViewModel)
+        public PaymentDTO Add(PaymentDTO paymentDTO)
         {
-            var payment = this.mapper.Map<PaymentViewModel, Payment>(paymentViewModel);
+            var payment = this.mapper.Map<PaymentDTO, Payment>(paymentDTO);
             this.unitOfWork.Payment.Add(payment);
             this.unitOfWork.SaveChanges();
-            paymentViewModel.ID = payment.ID;
-            return paymentViewModel;
+            paymentDTO.ID = payment.ID;
+            return paymentDTO;
         }
 
-        public PaymentViewModel Get(long paymentid)
+        public PaymentDTO Get(long paymentid)
         {
             return this.GetAll().Where(x => x.ID == paymentid).FirstOrDefault();
         }
 
-        public IQueryable<PaymentViewModel> GetAll()
+        public IQueryable<PaymentDTO> GetAll()
         {
-            return this.unitOfWork.Payment.GetAll().ProjectTo<PaymentViewModel>(mapper.ConfigurationProvider);
+            return from p in unitOfWork.Payment.GetAll()
+                   select new PaymentDTO {
+                       ID = p.ID,
+                       AccountID = p.AccountID,
+                       Amount = p.Amount,
+                       Date = p.Date,
+                       Status = p.Status == Status.Closed.ToString() ? $"{p.Status} - {p.Reason}" : p.Status
+                   };
+        }
+
+        public IQueryable<PaymentDTO> GetAllByAccountId(long accountid)
+        {
+            return this.GetAll().Where(x => x.AccountID == accountid).OrderByDescending(x => x.Date);
         }
     }
 }

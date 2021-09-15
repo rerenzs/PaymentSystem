@@ -18,7 +18,7 @@ namespace PaymentSystem.Persistence.Seeds
                     Amount = 1000,
                     Status = Status.Closed.ToString(),
                     Date = DateTime.Now,
-                    Reason = "some reason",
+                    Reason = "Duplicate",
 
                 },
                 new Payment
@@ -28,7 +28,7 @@ namespace PaymentSystem.Persistence.Seeds
                     Amount = 5000,
                     Status = Status.Closed.ToString(),
                     Date = DateTime.Now,
-                    Reason = "",
+                    Reason = "resolved",
 
                 },
                 new Payment

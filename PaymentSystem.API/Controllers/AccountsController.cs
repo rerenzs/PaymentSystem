@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PaymentSystem.Domain.Enums;
 using PaymentSystem.Domain.IServices;
-using PaymentSystem.Domain.ViewModels;
+using PaymentSystem.Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,24 +15,22 @@ namespace PaymentSystem.API.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly IAccountService accountService;
+        private readonly IPaymentService paymentService;
 
-        public AccountsController(IAccountService accountService)
+        public AccountsController(IAccountService accountService, IPaymentService paymentService)
         {
             this.accountService = accountService;
+            this.paymentService = paymentService;
         }
         [HttpGet("{id}")]
-        public IActionResult Get(long id, string status)
+        public IActionResult Get(long id)
         {
             try
             {
-                var account = new AccountViewModel();
+                var account = new AccountDTO();
 
-                if (status!=null){
-                    account = accountService.Get(id,status); 
-                }
-                else {
-                    account = accountService.Get(id);
-                }
+                account = accountService.Get(id);
+                account.Payments = paymentService.GetAllByAccountId(account.ID);
 
                 if (account != null) return Ok(account);
                 else return NotFound();
@@ -46,22 +44,22 @@ namespace PaymentSystem.API.Controllers
         {
             try
             {
-                var account = accountService.GetAll();
-                return Ok(account); 
+                var accounts = accountService.GetAllWithPayments();
+                return Ok(accounts); 
             }
             catch (Exception ex) {
                 return BadRequest($"Failed to get Accounts:{ex}");
             }
         }
         [HttpPost]
-        public IActionResult POST([FromBody]AccountViewModel accountViewModel)
+        public IActionResult POST([FromBody]AccountDTO accountDTO)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
 
-                    var account = accountService.Add(accountViewModel);
+                    var account = accountService.Add(accountDTO);
                     return Created($"/api/accounts/{account.ID}", account);
                 }
                 else
