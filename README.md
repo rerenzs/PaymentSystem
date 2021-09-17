@@ -20,20 +20,11 @@ GET https://localhost:44341/api/accounts
 //get account by id
 GET https://localhost:44341/api/accounts/{accountid}
 
-//get account by id with payment status filter
-GET https://localhost:44341/api/accounts/{accountid}?status=close
-
 //get all payments from an account
 GET https://localhost:44341/api/accounts/{accountid}/payments
 
 //get payment by paymentid from an account
 GET https://localhost:44341/api/accounts/{accountid}/payments/{paymentid}
-
-//get all payments 
-GET https://localhost:44341/api/payments
-
-//get payment by paymentid 
-GET https://localhost:44341/api/payments/{paymentid}
 
 Sample payloads for adding accounts and payments
 ================================================
@@ -59,6 +50,6 @@ Solution Structure
 =======================================================
 - PaymentSystem.API - presentation layer for http api
 - PaymentSystem.Domain - Project for entities, enums and interfaces.
-- PaymentSystem.Persistence - Project that contains the Db Context and repository implementation(Ef and Mock Repo).
+- PaymentSystem.Persistence - Project that contains the Db Context and repository implementation.
 - PaymentSystem.Services - Project that contains all the services implementation that will be used in the presentation layer.
 - PaymentSystem.UnitTest - Project for unit testing

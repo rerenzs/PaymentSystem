@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PaymentSystem.Domain.IRepositories;
+using PaymentSystem.Persistence.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace PaymentSystem.Persistence.Repositories
 {

@@ -12,15 +12,15 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/accounts/1/payments",
+      "launchUrl": "api/payments",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
     "PaymentSystem.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/accounts",
+      "launchUrl": "api/payments",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

@@ -14,7 +14,6 @@ namespace PaymentSystem.Persistence.Seeds
                 new Payment
                 {
                     ID = 1,
-                    AccountID = 1,
                     Amount = 1000,
                     Status = Status.Closed.ToString(),
                     Date = DateTime.Now,
@@ -24,7 +23,6 @@ namespace PaymentSystem.Persistence.Seeds
                 new Payment
                 {
                     ID = 2,
-                    AccountID = 1,
                     Amount = 5000,
                     Status = Status.Closed.ToString(),
                     Date = DateTime.Now,
@@ -34,12 +32,10 @@ namespace PaymentSystem.Persistence.Seeds
                 new Payment
                 {
                     ID = 3,
-                    AccountID = 2,
                     Amount = 500,
                     Status = Status.Pending.ToString(),
                     Date = DateTime.Now,
                     Reason = "some reason",
-
                 },
             };
         }

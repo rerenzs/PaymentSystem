@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace PaymentSystem.Domain.Entities
 {
@@ -18,8 +16,6 @@ namespace PaymentSystem.Domain.Entities
         public string Reason { get; set; }
         [Required]
         public string Status { get; set; }
-        [Required]
-        public long AccountID { get; set; }
         public Account Account { get; set; }
     }
 }

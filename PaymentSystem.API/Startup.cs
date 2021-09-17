@@ -1,25 +1,19 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using PaymentSystem.Domain.IRepositories;
-using PaymentSystem.Domain.IServices;
-using PaymentSystem.Services.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using AutoMapper;
-using PaymentSystem.Services.Mapping;
+using Microsoft.IdentityModel.Tokens;
+using PaymentSystem.API.Middlewares;
+using PaymentSystem.Domain.Entities;
 using PaymentSystem.Persistence;
+using PaymentSystem.Persistence.Interfaces;
 using PaymentSystem.Persistence.Repositories;
-using Newtonsoft.Json.Serialization;
-using Microsoft.EntityFrameworkCore;
+using PaymentSystem.Services.Interfaces;
+using PaymentSystem.Services.Services;
+using System.Text;
 
 namespace PaymentSystem.API
 {
@@ -35,17 +29,28 @@ namespace PaymentSystem.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<Account, IdentityRole>(opt =>
+            {
+                opt.User.RequireUniqueEmail = true;
+            })
+                .AddEntityFrameworkStores<PaymentSystemContext>();
+
+            services.AddAuthentication()
+                .AddJwtBearer(opt => {
+                    opt.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidIssuer = Configuration["Tokens:Issuer"],
+                        ValidAudience = Configuration["Tokens:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
+                    };
+                });
+
             services.AddControllers();
 
             services.AddMvc()
             .AddJsonOptions(
                 options => options.JsonSerializerOptions.IgnoreNullValues = true
             );
-
-            services.AddAutoMapper(cfg =>
-            {
-                cfg.AddProfile<PaymentSystemProfile>();
-            });
 
             services.AddScoped<IAccountService,AccountService>();
             services.AddScoped<IPaymentService, PaymentService>();
@@ -64,10 +69,13 @@ namespace PaymentSystem.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

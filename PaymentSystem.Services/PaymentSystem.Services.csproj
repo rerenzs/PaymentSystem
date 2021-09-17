@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -8,11 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PaymentSystem.Domain\PaymentSystem.Domain.csproj" />
+    <ProjectReference Include="..\PaymentSystem.Persistence\PaymentSystem.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

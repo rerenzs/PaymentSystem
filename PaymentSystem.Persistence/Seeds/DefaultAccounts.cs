@@ -12,17 +12,23 @@ namespace PaymentSystem.Persistence.Seeds
             return new List<Account>() {
                 new Account
                 {
-                    ID = 1,
                     Name = "Peter Parker",
                     AccountNumber = 2123123,
                     Balance = 1200,
+                    Email = "peter@mail.com",
+                    NormalizedEmail = "PETER@MAIL.COM",
+                    UserName = "peter@mail.com",
+                    NormalizedUserName = "PETER@MAIL.COM",
                 },
                 new Account
                 {
-                    ID = 2,
                     Name = "John Doe",
                     AccountNumber = 65456453,
                     Balance = 2000,
+                    Email = "john@mail.com",
+                    NormalizedEmail = "JOHN@MAIL.COM",
+                    UserName = "john@mail.com",
+                    NormalizedUserName = "JOHN@MAIL.COM",
                 },
             };
         }
