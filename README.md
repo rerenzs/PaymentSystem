@@ -38,7 +38,7 @@ Value: Bearer {Generated Token}
 GET https://localhost:44341/api/payments
 
 //get payment by paymentid from the authenticated account
-GET https://localhost:44341/api//payments/{paymentid}
+GET https://localhost:44341/api/payments/{paymentid}
 
 Solution Structure
 =======================================================
