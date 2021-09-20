@@ -23,7 +23,7 @@ payload body:
 {
     "username" : "peter@mail.com",
     "userEmail" : "peter@mail.com",
-    "password" : ""
+    "password" : "Password@1"
 }
 
 
