@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PaymentSystem.Services.DTO;
 using PaymentSystem.Services.Interfaces;
 using System.Linq;
@@ -14,18 +15,23 @@ namespace PaymentSystem.API.Controllers
     {
         private readonly IAccountService accountService;
         private readonly IPaymentService paymentService;
+        private readonly ILogger<PaymentsController> logger;
 
         public PaymentsController(IAccountService accountService,
-            IPaymentService paymentService)
+            IPaymentService paymentService,
+            ILogger<PaymentsController> logger)
         {
             this.accountService = accountService;
             this.paymentService = paymentService;
+            this.logger = logger;
         }
         [HttpGet]
         public IActionResult Get()
         {
+            logger.LogInformation("Fetching account");
             var username = User.Identity.Name;
             var account = accountService.Get(username);
+            logger.LogInformation("Fetching account payments");
             account.Payments = paymentService.GetAllByAccountUsername(username);
 
             if (account != null) return Ok(account);
@@ -36,13 +42,14 @@ namespace PaymentSystem.API.Controllers
         {
             var username = User.Identity.Name;
             var account = accountService.Get(username);
-            account.Payments = paymentService.GetAllByAccountUsername(username);
-
-            var payment = account.Payments.Where(x => x.ID == paymentid).SingleOrDefault();
+            if (account != null) { 
+                logger.LogInformation("Fetching payment");
+                var payment = paymentService.Get(paymentid);
             
-            if (payment != null) return Ok(payment);
-            else return NotFound("Payment not found");
-
+                if (payment != null) return Ok(payment);
+                else return NotFound("Payment not found");
+            }
+            return NotFound("Account not found");
         }
     }
 }

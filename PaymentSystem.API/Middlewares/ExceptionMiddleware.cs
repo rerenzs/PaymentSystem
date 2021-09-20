@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using PaymentSystem.API.Models;
 using System;
 using System.Net;
@@ -10,10 +11,12 @@ namespace PaymentSystem.API.Middlewares
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate next;
+        private readonly ILogger<ExceptionMiddleware> logger;
 
-        public ExceptionMiddleware(RequestDelegate next)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
             this.next = next;
+            this.logger = logger;
         }
         public async Task InvokeAsync(HttpContext context) 
         {
@@ -23,6 +26,8 @@ namespace PaymentSystem.API.Middlewares
             }
             catch (Exception ex)
             {
+                logger.LogError($"Something went wrong: {ex}");
+
                 var Response = context.Response;
                 Response.ContentType = "application/json";
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PaymentSystem.Persistence.Migrations
 {
-    public partial class identity : Migration
+    public partial class passwordhash : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -183,8 +183,8 @@ namespace PaymentSystem.Persistence.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "AccountNumber", "Balance", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "985a4de8-ff19-4c44-b3dd-1b3d6894a5e1", 0, 2123123, 1200m, "e95a1f8e-9aa0-4984-b81e-5d76179c6926", "peter@mail.com", false, false, null, "Peter Parker", "PETER@MAIL.COM", "PETER@MAIL.COM", null, null, false, "43cfeb90-4ddb-49da-9f23-0a273e1f6da4", false, "peter@mail.com" },
-                    { "3159bf6e-dc0a-464b-8180-e3f032634313", 0, 65456453, 2000m, "6a6a3186-f0ad-4852-897b-3cf62c1a613a", "john@mail.com", false, false, null, "John Doe", "JOHN@MAIL.COM", "JOHN@MAIL.COM", null, null, false, "99d79016-fe08-44ab-8c7f-9cb486d3972c", false, "john@mail.com" }
+                    { "039810b4-655f-484d-964e-2e6d3887f15c", 0, 2123123, 1200m, "66ac81aa-869a-4b6b-9a8a-c8d00453f1d2", "peter@mail.com", false, false, null, "Peter Parker", "PETER@MAIL.COM", "PETER@MAIL.COM", "AQAAAAEAACcQAAAAEN6SumwOmWuukDVxd9Wcw6Cfzjl0TmAT1v0+wodwTlk9DpF4d2kS++fqga9NaOBs5Q==", null, false, "c5c884ca-5c53-46c8-b097-9b3ea9cc8a25", false, "peter@mail.com" },
+                    { "35446700-b6b2-4f67-bb7f-ec318d4cb4d3", 0, 65456453, 2000m, "1504e56a-2cad-4bee-aa5a-b71467ca1948", "john@mail.com", false, false, null, "John Doe", "JOHN@MAIL.COM", "JOHN@MAIL.COM", "AQAAAAEAACcQAAAAEH5VsWLU/tehah0II03sgR7J4xPmBwCr8Okhsvog7NvoZtykeaw3z9HK/XjgsWFXtQ==", null, false, "f5616e5b-b1b3-47f7-bb03-d79670f5b771", false, "john@mail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -192,9 +192,9 @@ namespace PaymentSystem.Persistence.Migrations
                 columns: new[] { "ID", "AccountId", "Amount", "Date", "Reason", "Status" },
                 values: new object[,]
                 {
-                    { 1L, "985a4de8-ff19-4c44-b3dd-1b3d6894a5e1", 1000m, new DateTime(2021, 9, 17, 13, 39, 26, 180, DateTimeKind.Local).AddTicks(3933), "Duplicate", "Closed" },
-                    { 2L, "985a4de8-ff19-4c44-b3dd-1b3d6894a5e1", 5000m, new DateTime(2021, 9, 17, 13, 39, 26, 181, DateTimeKind.Local).AddTicks(3685), "resolved", "Closed" },
-                    { 3L, "3159bf6e-dc0a-464b-8180-e3f032634313", 500m, new DateTime(2021, 9, 17, 13, 39, 26, 181, DateTimeKind.Local).AddTicks(3729), "some reason", "Pending" }
+                    { 1L, "039810b4-655f-484d-964e-2e6d3887f15c", 1000m, new DateTime(2021, 9, 20, 17, 21, 36, 952, DateTimeKind.Local).AddTicks(8798), "Duplicate", "Closed" },
+                    { 2L, "039810b4-655f-484d-964e-2e6d3887f15c", 5000m, new DateTime(2021, 9, 20, 17, 21, 36, 953, DateTimeKind.Local).AddTicks(8508), "resolved", "Closed" },
+                    { 3L, "35446700-b6b2-4f67-bb7f-ec318d4cb4d3", 500m, new DateTime(2021, 9, 20, 17, 21, 36, 953, DateTimeKind.Local).AddTicks(8550), "some reason", "Pending" }
                 });
 
             migrationBuilder.CreateIndex(

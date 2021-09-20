@@ -227,37 +227,39 @@ namespace PaymentSystem.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "985a4de8-ff19-4c44-b3dd-1b3d6894a5e1",
+                            Id = "039810b4-655f-484d-964e-2e6d3887f15c",
                             AccessFailedCount = 0,
                             AccountNumber = 2123123,
                             Balance = 1200m,
-                            ConcurrencyStamp = "e95a1f8e-9aa0-4984-b81e-5d76179c6926",
+                            ConcurrencyStamp = "66ac81aa-869a-4b6b-9a8a-c8d00453f1d2",
                             Email = "peter@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Peter Parker",
                             NormalizedEmail = "PETER@MAIL.COM",
                             NormalizedUserName = "PETER@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN6SumwOmWuukDVxd9Wcw6Cfzjl0TmAT1v0+wodwTlk9DpF4d2kS++fqga9NaOBs5Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "43cfeb90-4ddb-49da-9f23-0a273e1f6da4",
+                            SecurityStamp = "c5c884ca-5c53-46c8-b097-9b3ea9cc8a25",
                             TwoFactorEnabled = false,
                             UserName = "peter@mail.com"
                         },
                         new
                         {
-                            Id = "3159bf6e-dc0a-464b-8180-e3f032634313",
+                            Id = "35446700-b6b2-4f67-bb7f-ec318d4cb4d3",
                             AccessFailedCount = 0,
                             AccountNumber = 65456453,
                             Balance = 2000m,
-                            ConcurrencyStamp = "6a6a3186-f0ad-4852-897b-3cf62c1a613a",
+                            ConcurrencyStamp = "1504e56a-2cad-4bee-aa5a-b71467ca1948",
                             Email = "john@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "John Doe",
                             NormalizedEmail = "JOHN@MAIL.COM",
                             NormalizedUserName = "JOHN@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH5VsWLU/tehah0II03sgR7J4xPmBwCr8Okhsvog7NvoZtykeaw3z9HK/XjgsWFXtQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "99d79016-fe08-44ab-8c7f-9cb486d3972c",
+                            SecurityStamp = "f5616e5b-b1b3-47f7-bb03-d79670f5b771",
                             TwoFactorEnabled = false,
                             UserName = "john@mail.com"
                         });
@@ -297,7 +299,7 @@ namespace PaymentSystem.Persistence.Migrations
                         {
                             ID = 1L,
                             Amount = 1000m,
-                            Date = new DateTime(2021, 9, 17, 13, 39, 26, 180, DateTimeKind.Local).AddTicks(3933),
+                            Date = new DateTime(2021, 9, 20, 17, 21, 36, 952, DateTimeKind.Local).AddTicks(8798),
                             Reason = "Duplicate",
                             Status = "Closed"
                         },
@@ -305,7 +307,7 @@ namespace PaymentSystem.Persistence.Migrations
                         {
                             ID = 2L,
                             Amount = 5000m,
-                            Date = new DateTime(2021, 9, 17, 13, 39, 26, 181, DateTimeKind.Local).AddTicks(3685),
+                            Date = new DateTime(2021, 9, 20, 17, 21, 36, 953, DateTimeKind.Local).AddTicks(8508),
                             Reason = "resolved",
                             Status = "Closed"
                         },
@@ -313,7 +315,7 @@ namespace PaymentSystem.Persistence.Migrations
                         {
                             ID = 3L,
                             Amount = 500m,
-                            Date = new DateTime(2021, 9, 17, 13, 39, 26, 181, DateTimeKind.Local).AddTicks(3729),
+                            Date = new DateTime(2021, 9, 20, 17, 21, 36, 953, DateTimeKind.Local).AddTicks(8550),
                             Reason = "some reason",
                             Status = "Pending"
                         });
